@@ -7,6 +7,7 @@ const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 const session = require('koa-generic-session')
 const RedisStore = require('koa-redis')
+const {SESSION_SECRET_KEY} = require('./config/sectetKey')
 
 const { REDIS_CONF } = require('./config/db')
 
@@ -41,7 +42,7 @@ app.use(views(__dirname + '/views', {
 // })
 
 //设置session
-app.keys = ['ZIhao0816_0816@#']
+app.keys = [SESSION_SECRET_KEY]
 app.use(session({
     key: 'weibo.sid',//cookie name 默认是 koa.sid
     prefix: 'weibo:sess:',//cooie 前缀 默认是koa:sess:
