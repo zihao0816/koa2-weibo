@@ -12,6 +12,10 @@ const { REDIS_CONF } = require('./config/db')
 
 const index = require('./routes/index')
 const users = require('./routes/users')
+const userApiRouter = require('./routes/api/user')
+const loginViewRouter = require('./routes/view/user')
+const errorViewRouter = require('./routes/view/error')
+
 
 // error handler
 onerror(app)
@@ -53,6 +57,9 @@ app.use(session({
 // routes
 app.use(index.routes(), index.allowedMethods())
 app.use(users.routes(), users.allowedMethods())
+app.use(userApiRouter.routes(), userApiRouter.allowedMethods())
+app.use(loginViewRouter.routes(), loginViewRouter.allowedMethods())
+app.use(errorViewRouter.routes(),errorViewRouter.allowedMethods())//404需要放到最后
 
 
 // error-handling

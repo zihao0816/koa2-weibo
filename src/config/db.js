@@ -5,7 +5,7 @@ const REDIS_CONF = {
     host:'127.0.0.1'
 }
 const MYSQL_CONF = {
-    database:'',
+    database:'koa2_weibo',
     user:'root',
     password:'root',
 }

@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize')
 const {MYSQL_CONF} = require('../config/db')
-const  { isPro,isTest}  = require('../utils/')
+const  { isPro,isTest}  = require('../utils/env')
 
 let conf={
     host:'localhost',
@@ -15,7 +15,6 @@ if(isPro){
 }
 if(isTest){
     conf.logging=()=>{
-
     }
 }
 const {database,user,password } = MYSQL_CONF
