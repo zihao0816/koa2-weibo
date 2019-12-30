@@ -4,21 +4,16 @@
  */
 const {getUserInfo,addUser}= require('../services/user')
 const {  SucessModel,ErrorModel} = require('../model/resModel')
-const  {isExistInfo,registerInfo,registerSuccess} =require('../model/errorInfo')
-
+const  {isExistInfo,registerInfo,registerSuccess,loginErrorInfo} =require('../model/errorInfo')
+const doMd5 = require('../utils/md5')
 /**
  * @param {string} userName 用户名
  */
 async function isExist(userName){
-    //业务处理无
-    //调用servers 获取数据
-    //返回统一格式
     let result  = await getUserInfo(userName)
-    if(result){
-        return new SucessModel(result)
-    }else{
-        return new ErrorModel(isExistInfo)
-    }
+    if(result) return new SucessModel(result)
+    return new ErrorModel(isExistInfo)
+    
 }
 //注册
 async function register(userName,password,gender){
@@ -32,7 +27,16 @@ async function register(userName,password,gender){
     }
 }   
 
+//登录
+async function isLogin({ctx,userName,password}){
+    let userInfo = await getUserInfo(userName,doMd5(password))
+    if(!userInfo) return new ErrorModel(loginErrorInfo)
+    if(ctx.session.userInfo==null) ctx.session.userInfo =userInfo
+    return new SucessModel()
+}
+
 module.exports = {
     isExist,
-    register
+    register,
+    isLogin
 }

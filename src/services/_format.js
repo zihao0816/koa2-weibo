@@ -5,7 +5,7 @@
 
 function _formatUserPicture(obj){
     if(obj.picture==null){
-        return obj.picture = 'https://dwz.cn/rnTnftZs'
+        obj.picture = 'https://dwz.cn/rnTnftZs'
     }
     return obj
 }
@@ -17,9 +17,8 @@ function formatUser(list){
     if(list==null){
         return list
     }
-
     if(list instanceof Array){
-        list.map(_formatUserPicture)
+        return list.map(_formatUserPicture)
     }
 
     //单个对象
