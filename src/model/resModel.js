@@ -14,6 +14,9 @@ class ResModel {
         }
     }
 }
+var a = new ResModel({errno:0})
+
+
 
 class SucessModel extends ResModel {
     constructor(data = {} ) {

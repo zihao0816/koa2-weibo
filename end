@@ -1,0 +1,21 @@
+warning: LF will be replaced by CRLF in package.json.
+The file will have its original line endings in your working directory
+[1mdiff --git a/package.json b/package.json[m
+[1mindex ec0bdad..b34f7d5 100644[m
+[1m--- a/package.json[m
+[1m+++ b/package.json[m
+[36m@@ -10,6 +10,7 @@[m
+     "test": "cross-env NODE_ENV=jest jest --runInBand --forceExit --colors"[m
+   },[m
+   "dependencies": {[m
+[32m+[m[32m    "ajv": "^6.10.2",[m
+     "cross-env": "^6.0.3",[m
+     "debug": "^4.1.1",[m
+     "ejs": "~2.3.3",[m
+[36m@@ -40,6 +41,4 @@[m
+   "pre-commit": [[m
+     "lint"[m
+   ][m
+[31m-    [m
+[31m-  [m
+ }[m
