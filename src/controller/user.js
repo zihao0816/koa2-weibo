@@ -2,9 +2,9 @@
  * @description user 业务逻辑处理
  * @author 王子豪
  */
-const {getUserInfo,addUser}= require('../services/user')
+const {getUserInfo,addUser,delUser}= require('../services/user')
 const {  SucessModel,ErrorModel} = require('../model/resModel')
-const  {isExistInfo,registerInfo,registerSuccess,loginErrorInfo} =require('../model/errorInfo')
+const  {isExistInfo,registerInfo,registerSuccess,loginErrorInfo,delUserInfo} =require('../model/errorInfo')
 const doMd5 = require('../utils/md5')
 /**
  * @param {string} userName 用户名
@@ -32,11 +32,19 @@ async function isLogin({ctx,userName,password}){
     let userInfo = await getUserInfo(userName,doMd5(password))
     if(!userInfo) return new ErrorModel(loginErrorInfo)
     if(ctx.session.userInfo==null) ctx.session.userInfo =userInfo
+
     return new SucessModel()
 }
 
+//删除用户
+async function isDelete (userName){
+    let result = await delUser(userName)
+    if(result) return new SucessModel()
+    return new ErrorModel(delUserInfo)
+}
 module.exports = {
     isExist,
     register,
-    isLogin
+    isLogin,
+    isDelete
 }

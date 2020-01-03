@@ -7,11 +7,16 @@ const registerInfo = {errno:'1002',message:'注册失败'}
 const registerSuccess = {errno:'1004',message:'用户名已存在'}
 const jsonScrema = {errno:'1009',message:'字段校验出现错误'}
 const loginErrorInfo =  {errno:'1001',message:'用户名或密码错误'}
+const isloginInfo =  {errno:'1005',message:'您尚未登录'}
+const delUserInfo = {errno:'1006',message:'删除用户失败'}
 
 module.exports={
     isExistInfo,
     registerInfo,
     registerSuccess,
     jsonScrema,
-    loginErrorInfo
+    loginErrorInfo,
+    isloginInfo,
+    delUserInfo
+
 }

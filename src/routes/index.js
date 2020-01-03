@@ -1,7 +1,8 @@
 const router = require('koa-router')()
-
-router.get('/', async (ctx, next) => {
-    await ctx.render('哈哈哈')
+const { loginCheck,
+    loginRedict} = require('../middlewares/routeCkeck')
+router.get('/',loginCheck, async (ctx, next) => {
+    ctx.body = 'koa1 string'
 })
 
 router.get('/string', async (ctx, next) => {
