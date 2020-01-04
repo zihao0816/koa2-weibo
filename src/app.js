@@ -7,6 +7,9 @@ const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 const session = require('koa-generic-session')
 const RedisStore = require('koa-redis')
+const koaStatic = require('koa-static')
+const path = require('path')
+
 const {SESSION_SECRET_KEY} = require('./config/sectetKey')
 
 const { REDIS_CONF } = require('./config/db')
@@ -15,6 +18,7 @@ const index = require('./routes/index')
 const users = require('./routes/users')
 const userApiRouter = require('./routes/api/user')
 const loginViewRouter = require('./routes/view/user')
+const utilesAoiRouter = require('./routes/api/utiles')
 const errorViewRouter = require('./routes/view/error')
 
 
@@ -27,7 +31,8 @@ app.use(bodyparser({
 }))
 app.use(json())
 app.use(logger())
-app.use(require('koa-static')(__dirname + '/public'))
+app.use(koaStatic(__dirname + '/public'))
+app.use(koaStatic(path.join(__dirname,'..','uploadFiles')))
 
 app.use(views(__dirname + '/views', {
     extension: 'ejs'
@@ -60,6 +65,7 @@ app.use(index.routes(), index.allowedMethods())
 app.use(users.routes(), users.allowedMethods())
 app.use(userApiRouter.routes(), userApiRouter.allowedMethods())
 app.use(loginViewRouter.routes(), loginViewRouter.allowedMethods())
+app.use(utilesAoiRouter.routes(), utilesAoiRouter.allowedMethods())
 app.use(errorViewRouter.routes(),errorViewRouter.allowedMethods())//404需要放到最后
 
 

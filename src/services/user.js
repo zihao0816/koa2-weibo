@@ -14,9 +14,10 @@ const doMd5 = require('../utils/md5')
 
 async function getUserInfo(userName, password) {
     let whereObj = { userName }
+    
     if (password) Object.assign(whereObj, { password })
     let result = await User.findOne({
-        attributes: ['id', 'nickName', 'picture', 'city'],
+        attributes: ['id', 'userName','nickName', 'picture', 'city'],
         where: whereObj
     })
     //未找到
@@ -40,7 +41,6 @@ async function delUser(userName) {
             userName
         }
     })
-    console.log(999,userName,result)
     return result > 0
 }
 

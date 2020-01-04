@@ -9,6 +9,7 @@ const jsonScrema = {errno:'1009',message:'字段校验出现错误'}
 const loginErrorInfo =  {errno:'1001',message:'用户名或密码错误'}
 const isloginInfo =  {errno:'1005',message:'您尚未登录'}
 const delUserInfo = {errno:'1006',message:'删除用户失败'}
+const uploadSizeInfo={errno:'1007',message:'文件体积超过1m'}
 
 module.exports={
     isExistInfo,
@@ -17,6 +18,7 @@ module.exports={
     jsonScrema,
     loginErrorInfo,
     isloginInfo,
-    delUserInfo
+    delUserInfo,
+    uploadSizeInfo
 
 }
