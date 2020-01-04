@@ -44,9 +44,21 @@ async function delUser(userName) {
     return result > 0
 }
 
+//修改数据库中用户信息
+async function serverUpdateInfo(id,obj){
+    console.log(9999,obj)
+    let res = await User.update(obj,{
+        where:{
+            id
+        }
+    })
+    return res[0]>0
+}
+
 module.exports = {
     getUserInfo,
     addUser,
-    delUser
+    delUser,
+    serverUpdateInfo
 
 }
