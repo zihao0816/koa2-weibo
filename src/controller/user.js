@@ -43,23 +43,29 @@ async function isDelete(userName) {
 }
 
 //修改基本信息
-async function updateUserInfo(ctx, { nickName, city, picture }) {
-    const { id } = ctx.session.userInfo
-    let obj = {}
-    if (nickName) obj.nickName=nickName
-    if(city) obj.city = city
-    if(picture) obj.picture
-    const res = await serverUpdateInfo(id,obj)
+async function updateUserInfo(ctx, { nickName, city, picture,password }) {
+    const res = await serverUpdateInfo(ctx, { nickName, city, picture,password })
     if(!res) return new ErrorModel(changeUserInfo)
-    Object.assign(ctx.session.userInfo,obj)
-    return new SucessModel()
-
-    
+    Object.assign(ctx.session.userInfo,res)
+    return new SucessModel()    
 }
+//修改密码
+async function serviceUpdatePwd(ctx, { password }){
+    let res = await updateUserInfo(ctx, { password })
+    return res
+}
+//退出登录
+async function loginout(ctx){
+    delete ctx.session.userInfo
+    return new SucessModel()
+}
+
 module.exports = {
     isExist,
     register,
     isLogin,
     isDelete,
-    updateUserInfo
+    updateUserInfo,
+    serviceUpdatePwd,
+    loginout
 }

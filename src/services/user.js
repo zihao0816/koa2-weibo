@@ -45,14 +45,19 @@ async function delUser(userName) {
 }
 
 //修改数据库中用户信息
-async function serverUpdateInfo(id,obj){
-    console.log(9999,obj)
+async function serverUpdateInfo(ctx, { nickName, city, picture,password }){
+    const { id } = ctx.session.userInfo
+    let obj = {}
+    if (nickName) obj.nickName=nickName
+    if(city) obj.city = city
+    if(picture) obj.picture=picture
+    if(password) obj.password=doMd5(password)
     let res = await User.update(obj,{
         where:{
             id
         }
     })
-    return res[0]>0
+    return res[0]>0?obj:false
 }
 
 module.exports = {
