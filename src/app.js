@@ -14,8 +14,7 @@ const {SESSION_SECRET_KEY} = require('./config/sectetKey')
 
 const { REDIS_CONF } = require('./config/db')
 
-const index = require('./routes/index')
-const users = require('./routes/users')
+const blogViewRouter = require('./routes/view/blog')
 const userApiRouter = require('./routes/api/user')
 const loginViewRouter = require('./routes/view/user')
 const utilesAoiRouter = require('./routes/api/utiles')
@@ -61,11 +60,13 @@ app.use(session({
     })
 }))
 // routes
-app.use(index.routes(), index.allowedMethods())
-app.use(users.routes(), users.allowedMethods())
+app.use(blogViewRouter.routes(), blogViewRouter.allowedMethods())
+// app.use(index.routes(), index.allowedMethods())
+// app.use(users.routes(), users.allowedMethods())
 app.use(userApiRouter.routes(), userApiRouter.allowedMethods())
 app.use(loginViewRouter.routes(), loginViewRouter.allowedMethods())
 app.use(utilesAoiRouter.routes(), utilesAoiRouter.allowedMethods())
+
 app.use(errorViewRouter.routes(),errorViewRouter.allowedMethods())//404需要放到最后
 
 

@@ -30,6 +30,8 @@ router.post('/isExist', async (ctx, next) => {
 //用户名登录
 router.post('/login', async (ctx, next) => {
     const { userName, password } = ctx.request.body
+    let xx=  await isLogin({ ctx, userName, password })
+    console.log(8888,xx)
     ctx.body = await isLogin({ ctx, userName, password })
 })
 //删除当前用户仅在单元测试下面使用

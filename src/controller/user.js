@@ -46,7 +46,6 @@ async function isDelete(id) {
 async function updateUserInfo(ctx, { nickName, city, picture,password }) {
     const res = await serverUpdateInfo(ctx, { nickName, city, picture,password })
     if(!res) return new ErrorModel(changeUserInfo)
-    console.log(8888777,res)
     Object.assign(ctx.session.userInfo,res)
     console.log(ctx.session.userInfo)
     return new SucessModel()    
