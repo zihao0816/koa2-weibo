@@ -35,10 +35,10 @@ async function addUser(userName, password, gender) {
 }
 
 //测试环境下删除用户
-async function delUser(userName) {
+async function delUser(id) {
     let result = await User.destroy({
         where: {
-            userName
+            id
         }
     })
     return result > 0

@@ -36,8 +36,8 @@ router.post('/login', async (ctx, next) => {
 router.post('/delete',loginCheck, async (ctx, next) => {
     //仅是在测试环境下使用
     if (isTest) {
-        const { nickName } = ctx.session.userInfo
-        ctx.body = await isDelete(nickName)
+        const { id } = ctx.session.userInfo
+        ctx.body = await isDelete(id)
     }
 })
 //修改基本信息changeInfo

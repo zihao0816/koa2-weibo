@@ -36,8 +36,8 @@ async function isLogin({ ctx, userName, password }) {
 }
 
 //删除用户
-async function isDelete(userName) {
-    let result = await delUser(userName)
+async function isDelete(id) {
+    let result = await delUser(id)
     if (result) return new SucessModel()
     return new ErrorModel(delUserInfo)
 }
@@ -46,7 +46,9 @@ async function isDelete(userName) {
 async function updateUserInfo(ctx, { nickName, city, picture,password }) {
     const res = await serverUpdateInfo(ctx, { nickName, city, picture,password })
     if(!res) return new ErrorModel(changeUserInfo)
+    console.log(8888777,res)
     Object.assign(ctx.session.userInfo,res)
+    console.log(ctx.session.userInfo)
     return new SucessModel()    
 }
 //修改密码
