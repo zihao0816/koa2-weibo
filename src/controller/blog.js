@@ -6,12 +6,12 @@
 const { serviceCreateBlog } = require('../services/blog')
 const { SucessModel, ErrorModel } = require('../model/resModel')
 const {blogCreateInfo} = require('../model/errorInfo')
+const xss= require('xss')
 async function createBlog(ctx,content, image) {
     const {id} = ctx.session.userInfo
     try{
-        const res = await serviceCreateBlog({ userId:id,content, image })
+        const res = await serviceCreateBlog({ userId:id,content:xss(content), image })
         return new SucessModel()
-
     }catch(e){
         console.log(e.stack)
         return new ErrorModel(blogCreateInfo)
