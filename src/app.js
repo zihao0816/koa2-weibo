@@ -14,6 +14,7 @@ const {SESSION_SECRET_KEY} = require('./config/sectetKey')
 
 const { REDIS_CONF } = require('./config/db')
 
+const blogHomeApiRouter =require('./routes/api/blog-home')
 const blogViewRouter = require('./routes/view/blog')
 const userApiRouter = require('./routes/api/user')
 const loginViewRouter = require('./routes/view/user')
@@ -61,6 +62,7 @@ app.use(session({
 }))
 // routes
 app.use(blogViewRouter.routes(), blogViewRouter.allowedMethods())
+app.use(blogHomeApiRouter.routes(),blogHomeApiRouter.allowedMethods())
 // app.use(index.routes(), index.allowedMethods())
 // app.use(users.routes(), users.allowedMethods())
 app.use(userApiRouter.routes(), userApiRouter.allowedMethods())

@@ -11,7 +11,7 @@ const isloginInfo =  {errno:'1005',message:'您尚未登录'}
 const delUserInfo = {errno:'1006',message:'删除用户失败'}
 const uploadSizeInfo={errno:'1007',message:'文件体积超过1m'}
 const changeUserInfo ={errno:'1008',message:'修改用户基本信息失败'}
-
+const blogCreateInfo ={errno:'10010',message:'发表博客失败'}
 module.exports={
     isExistInfo,
     registerInfo,
@@ -21,6 +21,7 @@ module.exports={
     isloginInfo,
     delUserInfo,
     uploadSizeInfo,
-    changeUserInfo
+    changeUserInfo,
+    blogCreateInfo
 
 }
