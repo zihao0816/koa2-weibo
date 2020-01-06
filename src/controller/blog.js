@@ -3,10 +3,12 @@
  * @author 王子豪
  */
 
-const { serviceCreateBlog } = require('../services/blog')
+const { serviceCreateBlog ,serviceProfileBlog} = require('../services/blog')
 const { SucessModel, ErrorModel } = require('../model/resModel')
 const {blogCreateInfo} = require('../model/errorInfo')
+
 const xss= require('xss')
+
 async function createBlog(ctx,content, image) {
     const {id} = ctx.session.userInfo
     try{
@@ -16,9 +18,21 @@ async function createBlog(ctx,content, image) {
         console.log(e.stack)
         return new ErrorModel(blogCreateInfo)
     }
+}
 
+async function getProfile(userName,pageIndex=0){
+    const res = await serviceProfileBlog(userName,pageIndex)
+    let blogList = res.list
+    return new SucessModel({
+        isEmpty:blogList.length===0,
+        blogList,
+        pageSize:10,
+        pageIndex,
+        count:res.count
+    })
 }
 
 module.exports = {
-    createBlog
+    createBlog,
+    getProfile
 }
